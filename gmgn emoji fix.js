@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         GMGN 头像还原
 // @namespace    https://gmgn.ai/
-// @version      0.5.9
+// @version      0.5.11
 // @description  Restore GMGN emoji avatars in DOM lists and TradingView chart canvases using local system emoji rendering.
 // @match        https://gmgn.ai/*
 // @run-at       document-idle
@@ -29,7 +29,8 @@
   const PICKER_HINT_PATTERN = /Emoji|Smileys & People|Search|自定义图片/i;
   const EMOJI_FONT_FAMILY = '"Segoe UI Emoji","Apple Color Emoji","Noto Color Emoji",sans-serif';
   const HOLDINGS_EMOJI_SIZE_RATIO = 0.92;
-  const SIDEBAR_EMOJI_SIZE_RATIO = 1.02;
+  const SIDEBAR_EMOJI_SIZE_RATIO = 0.96;
+  const DETAIL_EMOJI_SIZE_RATIO = SIDEBAR_EMOJI_SIZE_RATIO;
   const DOM_FALLBACK_EMOJI_SIZE_RATIO = 0.78;
   const CHART_SOURCE_EMOJI_RATIO = 0.98;
   const CHART_SOURCE_EMOJI_Y_OFFSET_RATIO = 0.00;
@@ -515,6 +516,10 @@
       return HOLDINGS_EMOJI_SIZE_RATIO;
     }
 
+    if (context === 'detail') {
+      return DETAIL_EMOJI_SIZE_RATIO;
+    }
+
     if (context === 'sidebar') {
       return SIDEBAR_EMOJI_SIZE_RATIO;
     }
@@ -529,6 +534,10 @@
 
     if (isInsideBottomWideRegion(container, viewportWidth, viewportHeight)) {
       return 'holdings';
+    }
+
+    if (isInsideRightDetailRegion(container, rect, viewportWidth, viewportHeight)) {
+      return 'detail';
     }
 
     if (isInsideLeftNarrowRegion(container, rect, viewportWidth)) {
@@ -585,6 +594,35 @@
     }
 
     return rect.left <= 56;
+  }
+
+  function isInsideRightDetailRegion(container, rect, viewportWidth, viewportHeight) {
+    if (rect.left < viewportWidth * 0.68) {
+      return false;
+    }
+
+    let current = container;
+
+    while (current && current !== document.body) {
+      const currentRect = current.getBoundingClientRect();
+      const width = Math.round(currentRect.width);
+      const height = Math.round(currentRect.height);
+      const nearRightEdge = viewportWidth - currentRect.right <= Math.max(48, viewportWidth * 0.04);
+
+      if (
+        currentRect.left >= viewportWidth * 0.58 &&
+        nearRightEdge &&
+        width >= Math.max(260, viewportWidth * 0.16) &&
+        width <= Math.max(520, viewportWidth * 0.34) &&
+        height >= Math.max(280, viewportHeight * 0.45)
+      ) {
+        return true;
+      }
+
+      current = current.parentElement;
+    }
+
+    return false;
   }
 
   function isInsideEmojiPicker(element) {
