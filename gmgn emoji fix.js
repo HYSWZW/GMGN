@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         GMGN 头像还原
 // @namespace    https://gmgn.ai/
-// @version      0.5.7
+// @version      0.5.9
 // @description  Restore GMGN emoji avatars in DOM lists and TradingView chart canvases using local system emoji rendering.
 // @match        https://gmgn.ai/*
 // @run-at       document-idle
@@ -31,8 +31,9 @@
   const HOLDINGS_EMOJI_SIZE_RATIO = 0.92;
   const SIDEBAR_EMOJI_SIZE_RATIO = 1.02;
   const DOM_FALLBACK_EMOJI_SIZE_RATIO = 0.78;
-  const CHART_SOURCE_EMOJI_RATIO = 1.04;
-  const CHART_SOURCE_EMOJI_Y_OFFSET_RATIO = 0.03;
+  const CHART_SOURCE_EMOJI_RATIO = 0.98;
+  const CHART_SOURCE_EMOJI_Y_OFFSET_RATIO = 0.00;
+  const CHART_CENTERING_MODE = 'measure-text';
 
   let scheduled = false;
   let replacementCounter = 0;
@@ -232,7 +233,13 @@
       chartEmojiCanvasCache.set(win, frameCache);
     }
 
-    const cacheKey = `${code}:${width}x${height}`;
+    const cacheKey = [
+      code,
+      `${width}x${height}`,
+      `ratio=${CHART_SOURCE_EMOJI_RATIO}`,
+      `centering=${CHART_CENTERING_MODE}`,
+      `offset=${CHART_SOURCE_EMOJI_Y_OFFSET_RATIO}`
+    ].join(':');
     const cached = frameCache.get(cacheKey);
     if (cached) {
       return cached;
@@ -254,16 +261,33 @@
 
     context.clearRect(0, 0, width, height);
     context.textAlign = 'center';
-    context.textBaseline = 'middle';
     context.font = `${Math.floor(Math.min(width, height) * CHART_SOURCE_EMOJI_RATIO)}px ${EMOJI_FONT_FAMILY}`;
-    context.fillText(
-      emoji,
-      width / 2,
-      height / 2 + Math.floor(Math.min(width, height) * CHART_SOURCE_EMOJI_Y_OFFSET_RATIO)
-    );
+    drawCenteredChartEmoji(context, emoji, width, height);
 
     frameCache.set(cacheKey, canvas);
     return canvas;
+  }
+
+  function drawCenteredChartEmoji(context, emoji, width, height) {
+    const centerX = width / 2;
+    const centerY = height / 2;
+    const metrics = context.measureText(emoji);
+    const ascent = metrics.actualBoundingBoxAscent;
+    const descent = metrics.actualBoundingBoxDescent;
+
+    if (Number.isFinite(ascent) && Number.isFinite(descent) && (ascent > 0 || descent > 0)) {
+      const baselineY = centerY + (ascent - descent) / 2;
+      context.textBaseline = 'alphabetic';
+      context.fillText(emoji, centerX, baselineY);
+      return;
+    }
+
+    context.textBaseline = 'middle';
+    context.fillText(
+      emoji,
+      centerX,
+      centerY + Math.floor(Math.min(width, height) * CHART_SOURCE_EMOJI_Y_OFFSET_RATIO)
+    );
   }
 
   function collectCandidates(root) {
