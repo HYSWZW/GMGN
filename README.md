@@ -32,26 +32,7 @@ GMGN 钱包备注里挑的 emoji,和页面最终显示出来的 emoji 不是同�
 - GMGN 把图表头像换成别的资源链路(`external-res`、SVG、服务端合成位图)时,拦截要重写一轮。
 - GMGN 改列表头像的容器结构时,选择器要补一条。
 
-页面结构变了就提 issue,或者用下面的探针脚本自己取证。
-
-## 调试取证
-
-[chart-avatar-probe.user.js](https://raw.githubusercontent.com/HYSWZW/gmgn-emoji-fix/main/chart-avatar-probe.user.js) 是只读探针,不要装成 userscript。
-
-1. 打开 GMGN K 线页,按 `F12` 进 Console
-2. 整段粘进去运行
-3. 鼠标悬停到 K 线头像上(不要点),按 `z`
-4. 控制台打印该位置的元素栈 transcript 和 `drawImage` 日志,并尝试复制 JSON 到剪贴板
-
-优先探测 GM 的 blob TradingView iframe;可读时直接在 iframe 内部取样,避免点击后弹出的右侧详情面板干扰。
-
-## 自带脚本
-
-| 文件 | 作用 |
-| --- | --- |
-| [gmgn-emoji-fix.user.js](https://raw.githubusercontent.com/HYSWZW/gmgn-emoji-fix/main/gmgn-emoji-fix.user.js) | 本仓库主角:emoji 头像还原 |
-| [gmgn-wallet-panel-scale.user.js](https://raw.githubusercontent.com/HYSWZW/gmgn-emoji-fix/main/gmgn-wallet-panel-scale.user.js) | 顺手写的一个:放大左侧钱包追踪面板的字号和行距 |
-| [chart-avatar-probe.user.js](https://raw.githubusercontent.com/HYSWZW/gmgn-emoji-fix/main/chart-avatar-probe.user.js) | 只读取证探针,开发用 |
+页面结构变了就提 issue,附上能复现的页面和截图。
 
 ## License
 
