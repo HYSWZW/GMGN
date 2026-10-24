@@ -1,3 +1,6 @@
+// Chart Avatar Probe - 只读调试脚本,不要装成 userscript。
+// 打开 GMGN K 线页,F12 Console 里整段粘进去运行,鼠标悬停到头像上按 z,打印元素栈和 drawImage 日志。
+// 不修改任何数据,不发任何请求。
 (() => {
   const HOTKEY = 'z';
   const IFRAME_SELECTOR = 'iframe[src^="blob:https://gmgn.ai/"]';

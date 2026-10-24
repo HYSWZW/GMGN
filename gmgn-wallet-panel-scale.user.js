@@ -1,11 +1,19 @@
 // ==UserScript==
-// @name         GMGN 左侧钱包追踪放大
-// @namespace    https://gmgn.ai
-// @version      0.2.0
+// @name         GMGN Wallet Panel Scale
+// @name:zh-CN   GMGN 左侧钱包追踪放大
+// @namespace    https://github.com/HYSWZW/gmgn-emoji-fix
+// @version      1.0.0
 // @description  Enlarge the left wallet tracking panel text and row spacing on GMGN.
+// @description:zh-CN  放大 GMGN 左侧钱包追踪面板的字号和行距。
+// @author       weigr
+// @license      MIT
 // @match        https://gmgn.ai/*
 // @run-at       document-idle
 // @grant        none
+// @homepageURL  https://github.com/HYSWZW/gmgn-emoji-fix
+// @supportURL   https://github.com/HYSWZW/gmgn-emoji-fix/issues
+// @updateURL    https://raw.githubusercontent.com/HYSWZW/gmgn-emoji-fix/main/gmgn-wallet-panel-scale.user.js
+// @downloadURL  https://raw.githubusercontent.com/HYSWZW/gmgn-emoji-fix/main/gmgn-wallet-panel-scale.user.js
 // ==/UserScript==
 
 (function () {
