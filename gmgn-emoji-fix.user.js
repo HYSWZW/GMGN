@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         GMGN Emoji Fix
 // @name:zh-CN   GMGN 头像还原
-// @namespace    https://github.com/HYSWZW/gmgn-emoji-fix
+// @namespace    https://github.com/HYSWZW/GMGN
 // @version      1.0.0
 // @description  Restore GMGN emoji avatars to your system emoji style, including TradingView chart canvases.
 // @description:zh-CN  把 GMGN 钱包备注的 emoji 头像还原成你本机系统 emoji 风格,含 K 线图里的 canvas 头像。
@@ -10,10 +10,10 @@
 // @match        https://gmgn.ai/*
 // @run-at       document-idle
 // @grant        none
-// @homepageURL  https://github.com/HYSWZW/gmgn-emoji-fix
-// @supportURL   https://github.com/HYSWZW/gmgn-emoji-fix/issues
-// @updateURL    https://raw.githubusercontent.com/HYSWZW/gmgn-emoji-fix/main/gmgn-emoji-fix.user.js
-// @downloadURL  https://raw.githubusercontent.com/HYSWZW/gmgn-emoji-fix/main/gmgn-emoji-fix.user.js
+// @homepageURL  https://github.com/HYSWZW/GMGN
+// @supportURL   https://github.com/HYSWZW/GMGN/issues
+// @updateURL    https://raw.githubusercontent.com/HYSWZW/GMGN/main/gmgn-emoji-fix.user.js
+// @downloadURL  https://raw.githubusercontent.com/HYSWZW/GMGN/main/gmgn-emoji-fix.user.js
 // ==/UserScript==
 
 (function () {

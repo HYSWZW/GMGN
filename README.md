@@ -7,7 +7,7 @@ GMGN 钱包备注里挑的 emoji,和页面最终显示出来的 emoji 不是同�
 ## 安装
 
 1. 装 [Tampermonkey](https://www.tampermonkey.net/)
-2. 点这里安装 → **[gmgn-emoji-fix.user.js](https://raw.githubusercontent.com/HYSWZW/gmgn-emoji-fix/main/gmgn-emoji-fix.user.js)**
+2. 点这里安装 → **[gmgn-emoji-fix.user.js](https://raw.githubusercontent.com/HYSWZW/GMGN/main/gmgn-emoji-fix.user.js)**
 3. 打开 <https://gmgn.ai/>,刷新页面
 
 装完之后 Tampermonkey 会自动跟随本仓库更新,不用手动再装。
