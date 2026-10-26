@@ -2,7 +2,7 @@
 
 把你选的那个 emoji,还给你。
 
-GMGN 钱包备注里挑的 emoji,和页面最终显示出来的 emoji 不是同一套。挑的时候看到的是系统 emoji,显示的是 GMGN 自己的 `/static/emoji/*.webp`。这个脚本只在你本地把这层显示换回系统 emoji —— 包括 K 线图里直接用 canvas 画出来的那些头像。
+GMGN 钱包备注里挑的 emoji,和页面最终显示出来的 emoji 不是同一套。挑的时候看到的是系统 emoji,显示的是 GMGN 自己的 `/static/emoji/*.webp`。这个脚本只在你本地把这层显示换回系统 emoji —— 包括 K 线图里的头像。
 
 ## 安装
 
